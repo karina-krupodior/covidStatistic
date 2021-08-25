@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import  classes from './index.css';
 import reportWebVitals from './reportWebVitals';
+import Home from "./Home/Home";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+      <div className={classes.appWrapper}>
+          <Home/>
+      </div>
   </React.StrictMode>,
   document.getElementById('root')
 );
