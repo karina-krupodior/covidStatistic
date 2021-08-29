@@ -3,7 +3,9 @@ import logo from '../logo.jpg';
 import classes from './Banner.module.css';
 
 
-const Banner = () => {
+
+const Banner = (props) => {
+
     return (
         <Fragment>
             <header className={classes.header} >
@@ -13,7 +15,10 @@ const Banner = () => {
                 />
                 <span  className={classes.title}>STATISTIC</span>
             </header>
-            <input placeholder={"Search..."} className={classes.searchInput}  />
+            <input type='search'
+                   placeholder={props.placeholder}
+                   className={classes.searchInput}
+                   onChange={props.handleChange}/>
         </Fragment>
     )
 }

@@ -1,52 +1,15 @@
 import React from 'react';
-import './StatisticTable.css';
-import axios from "axios";
-import {shape,string,arrayOf} from 'prop-types';
+import {arrayOf, shape, string} from 'prop-types';
+import './StatisticTable.css'
 
 
-class StatisticTable extends React.Component {
+function StatisticTable(props) {
 
+    const {filteredCountries, isLoaded,  showModal} = props;
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            countries: [],
-            number : [
-            ]
-            }
-        }
-
-    componentDidMount() {
-        // axios.get('https://api.covid19api.com/countries')
-        //     .then(response => {
-        //         console.log(response,'response')
-        //         const res = response.data;
-        //         this.setState({ countries : res })
-        //     })
-        //     .catch(error=> {
-        //         console.log(error)
-        //     })
-
-        axios.get('https://api.covid19api.com/summary')
-            .then(response => {
-                console.log(response,'response')
-                const data = response.data;
-                const dataCountries =  response.data.Countries
-                console.log(dataCountries ,'dataCountries')
-                console.log(data,'data')
-
-                this.setState({ countries: dataCountries})
-            })
-            .catch(error=> {
-                console.log(error)
-            })
-    }
-
-
-
-    render() {
-
-        const { countries  } = this.state;
+    if (!isLoaded) {
+        return <div>Загрузка...</div>;
+    } else {
         return (
             <table>
                 <thead>
@@ -56,27 +19,27 @@ class StatisticTable extends React.Component {
                     <th style={{height: 80, width: "45%"}}>Total Confirmed</th>
                 </tr>
                 </thead>
-                {   countries.length &&  countries.map( ({Country,TotalConfirmed},index)  =>
+                {filteredCountries.length && filteredCountries.map((country, index) =>
                     <tbody>
-                                <tr>
-                                    <td>{index + 1}</td>
-                                    <td>{Country}</td>
-                                    <td>{TotalConfirmed}</td>
-                                </tr>
+                        <tr key={country.ID} onClick={() => showModal(country)}>
+                        <td>{index + 1}</td>
+                        <td>{country.Country}</td>
+                        <td>{country.TotalConfirmed}</td>
+                    </tr>
                     </tbody>
-                    )
-                }
+                )}
             </table>
         )
     }
 }
 
+
 StatisticTable.defaultProps = {
-    countries: []
+    filteredCountries: []
 }
 
 StatisticTable.propsTypes = {
-    countries: arrayOf(shape({
+    filteredCountries: arrayOf(shape({
         Country: string,
         TotalConfirmed: string,
     })),
