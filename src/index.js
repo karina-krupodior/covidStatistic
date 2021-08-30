@@ -4,7 +4,6 @@ import  classes from './index.css';
 import reportWebVitals from './reportWebVitals';
 import Home from "./Home/Home";
 
-
 ReactDOM.render(
   <React.StrictMode>
       <div className={classes.appWrapper}>

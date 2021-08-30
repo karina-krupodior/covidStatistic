@@ -27,13 +27,11 @@ class Home extends React.Component {
                 this.setState({countries: dataCountries, isLoaded: true})
             })
             .catch(error => {
-
                 console.log(error)
             })
     }
 
     showModal = (country) => {
-        console.log('count from show modal', country);
         this.setState({
             show: !this.state.show,
             currentCountry: country,
@@ -41,36 +39,28 @@ class Home extends React.Component {
     };
 
     updateSearch(event) {
-        console.log(event,'event')
-        this.setState({ searchField: event.target.value.substr(0,20)})
+        console.log(event, 'event')
+        this.setState({searchField: event.target.value.substr(0, 20)})
     }
 
     render() {
-
         const filteredCountries = this.state.countries.filter(
             (country) => {
                 return country.Country.toLowerCase().indexOf(this.state.searchField.toLowerCase()) !== -1;
             }
-    )
-            // get filter word length
-            // get country name and take first { amount of letters in search field }
-
-        //     country.Country.toLowerCase().includes(this.state.searchField)
-        // ))
-
+        )
         return (
             <div className={classes.home}>
                 <Banner
-                        placeholder={'Search...'}
-                        value = {this.state.searchField}
-                        onChange = {this.updateSearch.bind(this)}
-                        // handleChange={(e) => this.setState({searchField: e.target.value})}
+                    placeholder={'Search...'}
+                    value={this.state.searchField}
+                    onChange={this.updateSearch.bind(this)}
                 />
                 <StatisticTable
                     isLoaded={this.state.isLoaded}
                     filteredCountries={filteredCountries}
-                    show ={this.state.show}
-                    showModal = {this.showModal}
+                    show={this.state.show}
+                    showModal={this.showModal}
                 />
                 <Modal onClose={this.showModal} show={this.state.show} country={this.state.currentCountry}/>
             </div>

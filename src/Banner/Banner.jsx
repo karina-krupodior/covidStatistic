@@ -3,7 +3,6 @@ import logo from '../Images/logo.jpg';
 import classes from './Banner.module.css';
 
 const Banner = (props) => {
-
     return (
         <Fragment>
             <header className={classes.header} >
