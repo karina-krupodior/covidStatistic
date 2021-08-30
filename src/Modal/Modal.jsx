@@ -5,8 +5,6 @@ import scull from '../Images/scull.jpg';
 import medical_cross from '../Images/medicalСross.jpg';
 import heart from '../Images/heart.png';
 
-
-
 class Modal extends React.Component {
 
     onClose = e => {
