@@ -1,9 +1,9 @@
 import React, {Fragment} from 'react';
-import logo from '../logo.jpg';
+import logo from '../Images/logo.jpg';
 import classes from './Banner.module.css';
 
+const Banner = (props) => {
 
-const Banner = () => {
     return (
         <Fragment>
             <header className={classes.header} >
@@ -13,7 +13,11 @@ const Banner = () => {
                 />
                 <span  className={classes.title}>STATISTIC</span>
             </header>
-            <input placeholder={"Search..."} className={classes.searchInput}  />
+            <input type='search'
+                   placeholder={props.placeholder}
+                   value={props.value}
+                   className={classes.searchInput}
+                   onChange={props.onChange}/>
         </Fragment>
     )
 }
