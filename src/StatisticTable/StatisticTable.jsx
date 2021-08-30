@@ -5,10 +5,10 @@ import './StatisticTable.css'
 
 function StatisticTable(props) {
 
-    const {filteredCountries, isLoaded,  showModal} = props;
+    const {filteredCountries, isLoaded, showModal} = props;
 
     if (!isLoaded) {
-        return <div>Загрузка...</div>;
+        return <div>Loading...</div>;
     } else {
         return (
             <table>
@@ -20,8 +20,8 @@ function StatisticTable(props) {
                 </tr>
                 </thead>
                 {filteredCountries.length && filteredCountries.map((country, index) =>
-                    <tbody>
-                        <tr key={country.ID} onClick={() => showModal(country)}>
+                    <tbody key={country.ID}>
+                    <tr onClick={() => showModal(country)}>
                         <td>{index + 1}</td>
                         <td>{country.Country}</td>
                         <td>{country.TotalConfirmed}</td>
@@ -32,7 +32,6 @@ function StatisticTable(props) {
         )
     }
 }
-
 
 StatisticTable.defaultProps = {
     filteredCountries: []

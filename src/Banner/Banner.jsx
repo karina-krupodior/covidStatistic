@@ -1,8 +1,6 @@
 import React, {Fragment} from 'react';
-import logo from '../logo.jpg';
+import logo from '../Images/logo.jpg';
 import classes from './Banner.module.css';
-
-
 
 const Banner = (props) => {
 
@@ -17,8 +15,9 @@ const Banner = (props) => {
             </header>
             <input type='search'
                    placeholder={props.placeholder}
+                   value={props.value}
                    className={classes.searchInput}
-                   onChange={props.handleChange}/>
+                   onChange={props.onChange}/>
         </Fragment>
     )
 }

@@ -3,7 +3,7 @@ import Banner from "../Banner/Banner";
 import classes from './Home.module.css';
 import StatisticTable from "../StatisticTable/StatisticTable";
 import axios from "axios";
-import Modal from "../Modal";
+import Modal from "../Modal/Modal";
 
 
 class Home extends React.Component {
@@ -13,9 +13,8 @@ class Home extends React.Component {
             countries: [],
             show: false,
             isLoaded: false,
-            searchField: [],
+            searchField: '',
             currentCountry: null,
-            // selectedCountry: {},
         }
     }
 
@@ -41,20 +40,32 @@ class Home extends React.Component {
         });
     };
 
+    updateSearch(event) {
+        console.log(event,'event')
+        this.setState({ searchField: event.target.value.substr(0,20)})
+    }
+
     render() {
 
-        const filteredCountries = this.state.countries.filter(country => (
+        const filteredCountries = this.state.countries.filter(
+            (country) => {
+                return country.Country.toLowerCase().indexOf(this.state.searchField.toLowerCase()) !== -1;
+            }
+    )
             // get filter word length
             // get country name and take first { amount of letters in search field }
 
-            country.Country.toLowerCase().includes(this.state.searchField)
-        ))
+        //     country.Country.toLowerCase().includes(this.state.searchField)
+        // ))
 
         return (
             <div className={classes.home}>
                 <Banner
                         placeholder={'Search...'}
-                        handleChange={(e) => this.setState({searchField: e.target.value})}/>
+                        value = {this.state.searchField}
+                        onChange = {this.updateSearch.bind(this)}
+                        // handleChange={(e) => this.setState({searchField: e.target.value})}
+                />
                 <StatisticTable
                     isLoaded={this.state.isLoaded}
                     filteredCountries={filteredCountries}
@@ -63,8 +74,6 @@ class Home extends React.Component {
                 />
                 <Modal onClose={this.showModal} show={this.state.show} country={this.state.currentCountry}/>
             </div>
-
-
         )
     }
 }
